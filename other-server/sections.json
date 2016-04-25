@@ -1,0 +1,105 @@
+{
+  "section1": {
+    "toc": {
+      "id": 10,
+      "title": "Section 1",
+      "href": "/section/1",
+      "badge": "2/3",
+      "active": true
+    },
+    "slides": [
+      {
+        "id": 11,
+        "title": "Slide 1",
+        "href": "/section/1/11",
+        "badge": ""
+      },
+      {
+        "id": 12,
+        "title": "Slide 2",
+        "href": "/section/1/12"
+      },
+      {
+        "id": 13,
+        "title": "Slide 3",
+        "href": "/section/1/13"
+      }
+    ],
+    "title": "Our Philosophy",
+    "subtitle": "Continuous delivery",
+    "desc": "Lorem ipsum dolor sit amet, id affert vituperatoribus nec, eu pri admodum minimum singulis. Per primis dignissim splendide no, diceret minimum phaedrum qui an. Theophrastus definitionem qui et, nam ipsum iriure te. Pro wisi soleat id, no eum nemore scaevola."
+  },
+  "section2": {
+    "toc": {
+      "id": 20,
+      "title": "Section 2",
+      "href": "/section/2",
+      "badge": "1/5",
+      "active": true
+    },
+    "slides": [
+      {
+        "id": 21,
+        "title": "Slide 1",
+        "href": "/section/2/21"
+      },
+      {
+        "id": 22,
+        "title": "Slide 2",
+        "href": "/section/2/22"
+      },
+      {
+        "id": 23,
+        "title": "Slide 3",
+        "href": "/section/2/23"
+      },
+      {
+        "id": 24,
+        "title": "Slide 4",
+        "href": "/section/2/24"
+      },
+      {
+        "id": 25,
+        "title": "Slide 5",
+        "href": "/section/2/25"
+      }
+    ],
+    "title": "Our Process",
+    "subtitle": "From design to production",
+    "desc": "Duo ad mollis atomorum contentiones. Wisi lorem senserit eum eu. Pri id senserit petentium, nec pericula disputationi cu. Id nostro splendide comprehensam sea, alia phaedrum an eos. Per id justo cetero tractatos, oblique elaboraret eu est."
+  },
+  "section3": {
+    "toc": {
+      "id": 30,
+      "title": "Section 3",
+      "href": "/section/3",
+      "badge": "3/4",
+      "active": true
+    },
+    "slides": [
+      {
+        "id": 31,
+        "title": "Slide 1",
+        "href": "/section/3/31"
+      },
+      {
+        "id": 32,
+        "title": "Slide 2",
+        "href": "/section/3/32"
+      },
+      {
+        "id": 33,
+        "title": "Slide 3",
+        "href": "/section/3/33"
+      },
+      {
+        "id": 35,
+        "title": "Slide 4",
+        "href": "/section/3/34"
+      }
+    ],
+    "title": "Continuous Delivery",
+    "subtitle": "From design to production",
+    "desc": "Pri eu labitur iuvaret reprimique, ei nam nihil facete quodsi. Vim no veniam homero, eu mel scripta labores. Eam ut gloriatur signiferumque, sea ex cetero aliquid. Ullum labore appellantur mei et, an his apeirian probatus salutatus. Sit ex omnis vocibus, qui errem populo cu."
+  }
+}

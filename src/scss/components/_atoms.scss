@@ -1,0 +1,30 @@
+// colors //
+$default-color: #787878;
+$primary-color: #337ab7;
+$green: #080;
+$bg-grad-dark: #f4f4f4;
+$bg-grad-lite: #efefef;
+$bg-lite-transparent:rgba(255, 255, 255, .5);
+$bg-dark-transparent:rgba(0, 0, 0, .2);
+
+$primary-bg: linear-gradient(to top, $bg-grad-dark 0%, $bg-grad-lite 100%);
+
+// font-stack //
+$font-stack: ('Helvetica Neue', Helvetica, Arial, sans-serif);
+
+$radius:10px;
+
+h1 {
+  color: $primary-color;
+  margin: 5px 0;
+}
+
+h3 {
+  color: $primary-color;
+}
+
+.nav {
+  .active {
+    color: $primary-color;
+  }
+}

@@ -1,0 +1,60 @@
+.breadcrumb {
+  background: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.breadcrumbs {
+  margin-top: 10px;
+}
+
+.page-header {
+  margin: 10px 0;
+}
+
+.page-footer {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.pagination {
+  margin: 20px auto;
+}
+
+.panel {
+  border-radius: $radius;
+  overflow: hidden;
+
+  .panel-title {
+    font-size: 26px;
+    font-weight: normal;
+  }
+
+}
+
+
+.modal-content {
+  border-radius: $radius;
+
+  .modal-header {
+    background: $bg-lite-transparent;
+    border-radius: $radius $radius 0 0;
+
+    .modal-title {
+      color: $primary-color;
+      font-size: 24px;
+    }
+  }
+
+  .modal-footer {
+    background: $bg-lite-transparent;
+    border-radius: 0 0 $radius $radius;
+
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+}
