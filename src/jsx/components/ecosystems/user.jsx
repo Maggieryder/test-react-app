@@ -22,7 +22,7 @@ var User = React.createClass({
   },
   getInitialState:function(){
     return {user: this.defaultUser()};
-  },  
+  },
   componentWillMount: function(){
     if (this.props.params){
       Actions.getUser(this.props.params.id);

@@ -21,6 +21,7 @@ var ModalInstance = require('../ecosystems/modal.jsx');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
+var nextRoute = 'users';
 
 var Users = React.createClass({
   mixins:[
@@ -29,6 +30,7 @@ var Users = React.createClass({
   contextTypes: {
     router: React.PropTypes.object
   },
+
   getInitialState: function(){
     return {
       users:[],
@@ -49,6 +51,7 @@ var Users = React.createClass({
       users:json,
       currentId:this.props.params.id
     });
+    this.context.router.push(nextRoute);
   },
   handleSubmit: function(user){
     console.log('SUBMIT USER with id', user.id);
@@ -58,20 +61,20 @@ var Users = React.createClass({
       var newUserData = userData.concat(user);
       this.setState({users: newUserData});
       Actions.addUser(user);
-      this.context.router.push('users/0');
+      nextRoute = 'users/0';
     } else {
       console.log("UPDATING USER");
       var i = _.findIndex(userData, {id:user.id});
       userData[i] = user;
       this.setState({users: userData});
       Actions.updateUser(user);
-      //this.context.router.push('users/'+i);
+      nextRoute = 'users/'+i;
     }
   },
   handleDelete: function(user){
     console.log('DELETE USER with id', user.id);
     Actions.deleteUser(user);
-    this.context.router.push('users');
+    nextRoute = 'users';
   },
   handleAdd:function(){
     Actions.showModal('ADD');

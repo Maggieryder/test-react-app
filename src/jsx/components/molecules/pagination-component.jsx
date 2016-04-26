@@ -3,7 +3,6 @@ var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var Pagination = Bootstrap.Pagination;
 var Glyphicon = Bootstrap.Glyphicon;
-var FontAwesome = require('react-fontawesome');
 
 var PaginationComponent = React.createClass({
   getInitialState:function() {

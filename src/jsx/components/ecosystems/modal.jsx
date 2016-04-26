@@ -3,7 +3,6 @@ var ReactDOMServer = require('react-dom/server');
 var Reflux = require('reflux');
 var Actions = require('../../actions/actions.jsx');
 var ModalStore = require('../../stores/modal-store.jsx');
-var ImageStore = require('../../stores/image-store.jsx');
 
 
 var Bootstrap = require('react-bootstrap');
@@ -21,8 +20,7 @@ var DropzoneComponent = require('../molecules/uploader.jsx');
 
 var ModalInstance = React.createClass({
   mixins:[
-    Reflux.listenTo(ModalStore, 'onModalUpdate'),
-    Reflux.listenTo(ImageStore, 'onImageUpload')
+    Reflux.listenTo(ModalStore, 'onModalUpdate')
   ],
   getInitialState:function(){
     return {
@@ -90,7 +88,6 @@ var ModalInstance = React.createClass({
   onImageDrop:function(file){
     console.log('ON DROP EVENT FROM MODAL');
     console.log(file.name, file);
-    //Actions.uploadImages(files, this.state.userName);
     this.setState({
       avatar: './images/'+file.name
     });
@@ -131,7 +128,7 @@ var ModalInstance = React.createClass({
     e.target.className='';
     this.setState({isUpdating:true});
   },
-  render: function(){    //console.log('isUpdating', isUpdating);
+  render: function(){
     var imageStyle = {
       width:"150px",
       padding:'10px'

@@ -2,7 +2,6 @@ var React = require('react');
 
 var Reflux = require('reflux');
 var Actions = require('../../actions/actions.jsx');
-var ImageStore = require('../../stores/image-store.jsx');
 
 var ReactDOMServer = require('react-dom/server');
 
@@ -66,7 +65,6 @@ var onQueueComplete = function(files){
 var onDropEvent = function(files) {
     console.log('ON DROP EVENT');
     console.log(files.name, files);
-    //Actions.uploadImages(files);
 };
 
 var eventHandlers = {

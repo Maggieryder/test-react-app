@@ -3,7 +3,6 @@ var _ = require('lodash');
 var path = require('path');
 var fs = require('fs');
 var multer = require('multer');
-var MulterImpl  = require('./multerImpl');
 var bodyParser = require('body-parser');
 var app = express();
 
