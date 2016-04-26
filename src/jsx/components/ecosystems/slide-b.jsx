@@ -3,7 +3,6 @@ var Reflux = require('reflux');
 var Actions = require('../../actions/actions.jsx');
 var SectionStore = require('../../stores/section-store.jsx');
 
-var Breadcrumbs = require('../molecules/breadcrumbs-component.jsx');
 var PaginationComponent = require('../molecules/pagination-component.jsx');
 
 var Section = React.createClass({
@@ -35,7 +34,7 @@ var Section = React.createClass({
         sectionId:'section'+nextProps.params.section,
         slideId:nextProps.params.id
       });
-    }  
+    }
   },
   onChange: function(e, json){
     console.log('onChange', json);

@@ -123,9 +123,7 @@ var ModalInstance = React.createClass({
     }
   },
   onUpdateImage:function(e){
-    console.log("I WANT TO UPDATE THIS IMAGE", e);
-    e.target.style.display='none';
-    e.target.className='';
+    console.log("I WANT TO UPDATE THIS IMAGE");
     this.setState({isUpdating:true});
   },
   render: function(){

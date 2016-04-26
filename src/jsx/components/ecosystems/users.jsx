@@ -21,8 +21,6 @@ var ModalInstance = require('../ecosystems/modal.jsx');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
-var nextRoute = 'users';
-
 var Users = React.createClass({
   mixins:[
     Reflux.listenTo(UsersStore, 'onChange')
@@ -33,6 +31,7 @@ var Users = React.createClass({
 
   getInitialState: function(){
     return {
+      nextroute:'',
       users:[],
       currentId:-1
     };
@@ -45,36 +44,44 @@ var Users = React.createClass({
     this.setState({currentId:nextProps.params.id});
   },
   onChange: function(e, json){
-    console.log('onChange num objects', json.length);
-    //var id = this.props.params.id || 0;
+    console.log('USERS onChange num objects', json.length);
     this.setState({
       users:json,
       currentId:this.props.params.id
     });
-    this.context.router.push(nextRoute);
+    if (this.state.nextroute !== ''){
+      console.log('PUSHING NEXT ROUTE', this.state.nextroute);
+      this.context.router.push(this.state.nextroute);
+      this.setState({nextroute:''});
+    }
   },
   handleSubmit: function(user){
-    console.log('SUBMIT USER with id', user.id);
     var userData = this.state.users;
     if (!user.id){
-      console.log("ADDING USER");
+      console.log("SUBMIT ===== ADDING USER with id", user.id);
       var newUserData = userData.concat(user);
-      this.setState({users: newUserData});
+      this.setState({
+        users: newUserData,
+        nextroute:'users/0'
+      });
       Actions.addUser(user);
-      nextRoute = 'users/0';
     } else {
-      console.log("UPDATING USER");
+      console.log("SUBMIT ===== UPDATING USER with id", user.id);
       var i = _.findIndex(userData, {id:user.id});
       userData[i] = user;
-      this.setState({users: userData});
+      this.setState({
+        users: userData,
+        nextroute:''
+      });
       Actions.updateUser(user);
-      nextRoute = 'users/'+i;
     }
   },
   handleDelete: function(user){
     console.log('DELETE USER with id', user.id);
     Actions.deleteUser(user);
-    nextRoute = 'users';
+    this.setState({
+      nextroute:'users'
+    });
   },
   handleAdd:function(){
     Actions.showModal('ADD');

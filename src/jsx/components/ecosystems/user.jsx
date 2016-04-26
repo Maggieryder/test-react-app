@@ -29,10 +29,10 @@ var User = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps){
-    if (this.props.params){
+    //if (nextProps.params.id !==this.props.params.id){
       console.log("nextProps.params.id ", nextProps.params.id);
       Actions.getUser(nextProps.params.id);
-    }
+    //}
   },
   onChange: function(e, json){
     console.log('CURRENT USER', json);

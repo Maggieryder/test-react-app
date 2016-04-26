@@ -61683,7 +61683,7 @@ var Header = React.createClass({
 
 module.exports = Header;
 
-},{"../../actions/actions.jsx":510,"../../stores/users-store.jsx":547,"../organisms/navbar.jsx":543,"react":483,"reflux":499}],520:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/users-store.jsx":546,"../organisms/navbar.jsx":542,"react":483,"reflux":499}],520:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -61853,9 +61853,7 @@ var ModalInstance = React.createClass({
     }
   },
   onUpdateImage: function onUpdateImage(e) {
-    console.log("I WANT TO UPDATE THIS IMAGE", e);
-    e.target.style.display = 'none';
-    e.target.className = '';
+    console.log("I WANT TO UPDATE THIS IMAGE");
     this.setState({ isUpdating: true });
   },
   render: function render() {
@@ -61950,7 +61948,7 @@ var ModalInstance = React.createClass({
 
 module.exports = ModalInstance;
 
-},{"../../actions/actions.jsx":510,"../../stores/modal-store.jsx":544,"../atoms/alert-box.jsx":512,"../molecules/uploader.jsx":542,"react":483,"react-bootstrap":267,"react-dom/server":280,"reflux":499}],522:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/modal-store.jsx":543,"../atoms/alert-box.jsx":512,"../molecules/uploader.jsx":541,"react":483,"react-bootstrap":267,"react-dom/server":280,"reflux":499}],522:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -62111,7 +62109,7 @@ var SectionIndex = React.createClass({
 
 module.exports = SectionIndex;
 
-},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":545,"../molecules/listgroup.jsx":539,"react":483,"reflux":499}],525:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":544,"../molecules/listgroup.jsx":538,"react":483,"reflux":499}],525:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -62206,7 +62204,7 @@ var Section = React.createClass({
 
 module.exports = Section;
 
-},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":545,"../molecules/pagination-component.jsx":540,"react":483,"reflux":499}],526:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":544,"../molecules/pagination-component.jsx":539,"react":483,"reflux":499}],526:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -62221,8 +62219,8 @@ var Shell = React.createClass({
 
 
   render: function render() {
-    console.log('*********', this.props.routes);
-    console.log('*********', this.props.params);
+    //console.log('*********', this.props.routes);
+    //console.log('*********', this.props.params);
     return React.createElement(
       'div',
       null,
@@ -62257,7 +62255,6 @@ var Reflux = require('reflux');
 var Actions = require('../../actions/actions.jsx');
 var SectionStore = require('../../stores/section-store.jsx');
 
-var Breadcrumbs = require('../molecules/breadcrumbs-component.jsx');
 var PaginationComponent = require('../molecules/pagination-component.jsx');
 
 var Section = React.createClass({
@@ -62368,7 +62365,7 @@ var Section = React.createClass({
 
 module.exports = Section;
 
-},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":545,"../molecules/breadcrumbs-component.jsx":537,"../molecules/pagination-component.jsx":540,"react":483,"reflux":499}],528:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":544,"../molecules/pagination-component.jsx":539,"react":483,"reflux":499}],528:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -62469,7 +62466,7 @@ var Slide = React.createClass({
 
 module.exports = Slide;
 
-},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":545,"react":483,"reflux":499}],529:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/section-store.jsx":544,"react":483,"reflux":499}],529:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -62505,10 +62502,10 @@ var User = React.createClass({
     }
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    if (this.props.params) {
-      console.log("nextProps.params.id ", nextProps.params.id);
-      Actions.getUser(nextProps.params.id);
-    }
+    //if (nextProps.params.id !==this.props.params.id){
+    console.log("nextProps.params.id ", nextProps.params.id);
+    Actions.getUser(nextProps.params.id);
+    //}
   },
   onChange: function onChange(e, json) {
     console.log('CURRENT USER', json);
@@ -62561,7 +62558,7 @@ var User = React.createClass({
 
 module.exports = User;
 
-},{"../../actions/actions.jsx":510,"../../stores/user-store.jsx":546,"react":483,"react-bootstrap":267,"reflux":499}],530:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/user-store.jsx":545,"react":483,"react-bootstrap":267,"reflux":499}],530:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -62587,8 +62584,6 @@ var ModalInstance = require('../ecosystems/modal.jsx');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
-var nextRoute = 'users';
-
 var Users = React.createClass({
   displayName: 'Users',
 
@@ -62599,6 +62594,7 @@ var Users = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
+      nextroute: '',
       users: [],
       currentId: -1
     };
@@ -62611,36 +62607,44 @@ var Users = React.createClass({
     this.setState({ currentId: nextProps.params.id });
   },
   onChange: function onChange(e, json) {
-    console.log('onChange num objects', json.length);
-    //var id = this.props.params.id || 0;
+    console.log('USERS onChange num objects', json.length);
     this.setState({
       users: json,
       currentId: this.props.params.id
     });
-    this.context.router.push(nextRoute);
+    if (this.state.nextroute !== '') {
+      console.log('PUSHING NEXT ROUTE', this.state.nextroute);
+      this.context.router.push(this.state.nextroute);
+      this.setState({ nextroute: '' });
+    }
   },
   handleSubmit: function handleSubmit(user) {
-    console.log('SUBMIT USER with id', user.id);
     var userData = this.state.users;
     if (!user.id) {
-      console.log("ADDING USER");
+      console.log("SUBMIT ===== ADDING USER with id", user.id);
       var newUserData = userData.concat(user);
-      this.setState({ users: newUserData });
+      this.setState({
+        users: newUserData,
+        nextroute: 'users/0'
+      });
       Actions.addUser(user);
-      nextRoute = 'users/0';
     } else {
-      console.log("UPDATING USER");
+      console.log("SUBMIT ===== UPDATING USER with id", user.id);
       var i = _.findIndex(userData, { id: user.id });
       userData[i] = user;
-      this.setState({ users: userData });
+      this.setState({
+        users: userData,
+        nextroute: ''
+      });
       Actions.updateUser(user);
-      nextRoute = 'users/' + i;
     }
   },
   handleDelete: function handleDelete(user) {
     console.log('DELETE USER with id', user.id);
     Actions.deleteUser(user);
-    nextRoute = 'users';
+    this.setState({
+      nextroute: 'users'
+    });
   },
   handleAdd: function handleAdd() {
     Actions.showModal('ADD');
@@ -62715,7 +62719,7 @@ var Users = React.createClass({
 
 module.exports = Users;
 
-},{"../../actions/actions.jsx":510,"../../stores/modal-store.jsx":544,"../../stores/users-store.jsx":547,"../ecosystems/modal.jsx":521,"../ecosystems/user.jsx":529,"lodash":183,"react":483,"react-bootstrap":267,"react-router":337,"reflux":499}],531:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"../../stores/modal-store.jsx":543,"../../stores/users-store.jsx":546,"../ecosystems/modal.jsx":521,"../ecosystems/user.jsx":529,"lodash":183,"react":483,"react-bootstrap":267,"react-router":337,"reflux":499}],531:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -63025,35 +63029,6 @@ module.exports = Slide23;
 'use strict';
 
 var React = require('react');
-// bootstrap components
-var Breadcrumb = require('react-bootstrap').Breadcrumb;
-var BreadcrumbItem = require('react-bootstrap').BreadcrumbItem;
-
-var BreadcrumbComponent = React.createClass({
-  displayName: 'BreadcrumbComponent',
-
-  render: function render() {
-    //console.log(this.props.crumbs);
-    return React.createElement(
-      Breadcrumb,
-      null,
-      this.props.crumbs.map(function (crumb, id) {
-        return React.createElement(
-          BreadcrumbItem,
-          { key: id, href: crumb.active ? null : crumb.href, active: crumb.active ? true : false },
-          crumb.title
-        );
-      })
-    );
-  }
-});
-
-module.exports = BreadcrumbComponent;
-
-},{"react":483,"react-bootstrap":267}],538:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
 
 var NavigationItem = require('../atoms/navigation-item.jsx');
 var NavigationDivider = require('../atoms/navigation-divider.jsx');
@@ -63096,7 +63071,7 @@ var DropDownMenu = React.createClass({
 
 module.exports = DropDownMenu;
 
-},{"../atoms/navigation-divider.jsx":515,"../atoms/navigation-item.jsx":516,"react":483}],539:[function(require,module,exports){
+},{"../atoms/navigation-divider.jsx":515,"../atoms/navigation-item.jsx":516,"react":483}],538:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -63126,7 +63101,7 @@ var ListGroup = React.createClass({
 
 module.exports = ListGroup;
 
-},{"../atoms/listgroup-item.jsx":514,"react":483}],540:[function(require,module,exports){
+},{"../atoms/listgroup-item.jsx":514,"react":483}],539:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -63187,7 +63162,7 @@ var PaginationComponent = React.createClass({
 
 module.exports = PaginationComponent;
 
-},{"react":483,"react-bootstrap":267}],541:[function(require,module,exports){
+},{"react":483,"react-bootstrap":267}],540:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -63226,7 +63201,7 @@ var SearchForm = React.createClass({
 
 module.exports = SearchForm;
 
-},{"../atoms/searchfield.jsx":517,"react":483}],542:[function(require,module,exports){
+},{"../atoms/searchfield.jsx":517,"react":483}],541:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -63386,7 +63361,7 @@ var Uploader = React.createClass({
 
 module.exports = Uploader;
 
-},{"../../actions/actions.jsx":510,"react":483,"react-bootstrap":267,"react-dom/server":280,"react-dropzone-component":283,"reflux":499}],543:[function(require,module,exports){
+},{"../../actions/actions.jsx":510,"react":483,"react-bootstrap":267,"react-dom/server":280,"react-dropzone-component":283,"reflux":499}],542:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -63473,7 +63448,7 @@ var Navbar = React.createClass({
 
 module.exports = Navbar;
 
-},{"../atoms/navigation-item.jsx":516,"../molecules/dropdown-menu.jsx":538,"../molecules/searchform.jsx":541,"react":483,"react-bootstrap":267,"react-router":337}],544:[function(require,module,exports){
+},{"../atoms/navigation-item.jsx":516,"../molecules/dropdown-menu.jsx":537,"../molecules/searchform.jsx":540,"react":483,"react-bootstrap":267,"react-router":337}],543:[function(require,module,exports){
 'use strict';
 
 var Reflux = require('reflux');
@@ -63499,7 +63474,7 @@ var ModalStore = Reflux.createStore({
 
 module.exports = ModalStore;
 
-},{"../actions/actions.jsx":510,"reflux":499}],545:[function(require,module,exports){
+},{"../actions/actions.jsx":510,"reflux":499}],544:[function(require,module,exports){
 'use strict';
 
 var API = require('../../api/api');
@@ -63522,7 +63497,7 @@ var SectionStore = Reflux.createStore({
 
 module.exports = SectionStore;
 
-},{"../../api/api":508,"../actions/actions.jsx":510,"reflux":499}],546:[function(require,module,exports){
+},{"../../api/api":508,"../actions/actions.jsx":510,"reflux":499}],545:[function(require,module,exports){
 'use strict';
 
 var API = require('../../api/api');
@@ -63534,15 +63509,8 @@ var UserStore = Reflux.createStore({
   getUser: function getUser(id) {
     console.log("GET USER :", id);
     API.get('/api/user/' + id).then(function (json) {
-      console.log("GET USER RESPONSE :", json);
+      //console.log("GET USER RESPONSE :", json);
       this.user = json;
-      var msg = '';
-      if (json.status === 200) {
-        msg = "GET USER successful!";
-      } else {
-        msg = "GET USER failed!";
-      }
-      console.log(msg, json.status);
       // refresh USER!!
       this.triggerUpdate();
     }.bind(this));
@@ -63555,7 +63523,7 @@ var UserStore = Reflux.createStore({
 
 module.exports = UserStore;
 
-},{"../../api/api":508,"../actions/actions.jsx":510,"reflux":499}],547:[function(require,module,exports){
+},{"../../api/api":508,"../actions/actions.jsx":510,"reflux":499}],546:[function(require,module,exports){
 'use strict';
 
 var API = require('../../api/api');
@@ -63567,8 +63535,7 @@ var UsersStore = Reflux.createStore({
   listenables: [Actions],
   getUsers: function getUsers() {
     API.get('/api/users').then(function (json) {
-      this.console(json, "GET ALL USERS");
-      console.log("GET ALL USERS RESPONSE :", json);
+      //this.console(json, "GET ALL USERS");
       this.users = json;
       // refresh data
       this.triggerUpdate();
@@ -63588,7 +63555,6 @@ var UsersStore = Reflux.createStore({
     if (!this.users) {
       this.users = [];
     }
-    console.log("adding user.id");
     user.id = "u-" + Math.floor(Date.now() / 1000);
     // refresh view
     this.users.unshift(user);
@@ -63599,21 +63565,23 @@ var UsersStore = Reflux.createStore({
       this.console(response, "ADD");
       // refresh data
       this.getUsers();
-      Actions.getUser(0);
+      //Actions.getUser(0);
     }.bind(this));
   },
   updateUser: function updateUser(user) {
     console.log(">>>>>> UPDATE user ", user.id);
     if (_.find(this.users, { 'id': user.id })) {
       var i = _.findIndex(this.users, { id: user.id });
-      console.log(">>>>>> UPDATE indexOf ", i);
+      //console.log(">>>>>> UPDATE indexOf ", i);
       //this.users.splice(i,1,user);
       this.users[i] = user;
+      this.triggerUpdate();
       API.post('/api/users', user).then(function (response) {
         this.console(response, "UPDATE");
         //this.getUsers();
         // refresh data
-        this.triggerUpdate();
+        //this.triggerUpdate();
+        this.getUsers();
         Actions.getUser(i);
       }.bind(this));
     }
@@ -63622,7 +63590,7 @@ var UsersStore = Reflux.createStore({
     console.log(">>>>>> DELETE user ", user.id);
     // refresh view
     var i = this.users.indexOf(user);
-    console.log(">>>>>> DELETE indexOf ", i);
+    //console.log(">>>>>> DELETE indexOf ", i);
     this.users.splice(i, 1);
     // refresh data
     this.triggerUpdate();

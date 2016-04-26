@@ -8,8 +8,7 @@ var UsersStore = Reflux.createStore({
   getUsers: function(){
     API.get('/api/users')
     .then(function(json){
-      this.console(json, "GET ALL USERS");
-      console.log("GET ALL USERS RESPONSE :", json);
+      //this.console(json, "GET ALL USERS");
       this.users = json;
       // refresh data
       this.triggerUpdate();
@@ -29,7 +28,6 @@ var UsersStore = Reflux.createStore({
     if (!this.users){
       this.users = [];
     }
-    console.log("adding user.id");
     user.id = "u-"+Math.floor(Date.now()/1000);
     // refresh view
     this.users.unshift(user);
@@ -41,22 +39,24 @@ var UsersStore = Reflux.createStore({
       this.console(response, "ADD");
       // refresh data
       this.getUsers();
-      Actions.getUser(0);
+      //Actions.getUser(0);
     }.bind(this));
   },
   updateUser: function(user){
     console.log(">>>>>> UPDATE user ", user.id);
     if (_.find(this.users, { 'id': user.id })){
       var i = _.findIndex(this.users, {id:user.id});
-      console.log(">>>>>> UPDATE indexOf ", i);
+      //console.log(">>>>>> UPDATE indexOf ", i);
       //this.users.splice(i,1,user);
       this.users[i] = user;
+      this.triggerUpdate();
       API.post('/api/users', user)
       .then(function(response){
         this.console(response, "UPDATE");
         //this.getUsers();
         // refresh data
-        this.triggerUpdate();
+        //this.triggerUpdate();
+        this.getUsers();
         Actions.getUser(i);
       }.bind(this));
     }
@@ -65,7 +65,7 @@ var UsersStore = Reflux.createStore({
     console.log(">>>>>> DELETE user ", user.id);
     // refresh view
     var i = this.users.indexOf(user);
-    console.log(">>>>>> DELETE indexOf ", i);
+    //console.log(">>>>>> DELETE indexOf ", i);
     this.users.splice(i,1);
     // refresh data
     this.triggerUpdate();

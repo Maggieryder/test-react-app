@@ -8,8 +8,8 @@ var Breadcrumbs = require('react-breadcrumbs');
 var Shell = React.createClass({
 
   render: function(){
-    console.log('*********', this.props.routes);
-    console.log('*********', this.props.params);
+    //console.log('*********', this.props.routes);
+    //console.log('*********', this.props.params);
     return(
       <div>
         <Header routes={this.props.routes} params={this.props.params}/>
